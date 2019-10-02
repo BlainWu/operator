@@ -5,6 +5,7 @@
 #ifndef OPERATOR_MOTOR_CONTROL_H
 #define OPERATOR_MOTOR_CONTROL_H
 
+#include<wiringPi.h>
 
 class Motor_Control {
 public:

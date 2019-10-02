@@ -1,0 +1,5 @@
+%YAML:1.0
+camera_num: 0
+FPS: 30
+face_model_path: "../data/haarcascade_frontalface_alt2.xml"
+eyes_model_path: "../data/haarcascade_eye.xml"
