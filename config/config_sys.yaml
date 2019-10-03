@@ -2,4 +2,6 @@
 camera_num: 0
 FPS: 30
 face_model_path: "../data/haarcascade_frontalface_alt2.xml"
-eyes_model_path: "../data/haarcascade_eye.xml"
+eyes_model_path: "../data/haarcascade_eye_tree_eyeglasses.xml"
+face_overlap_rate: 0.9
+face_mins: 2

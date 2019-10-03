@@ -25,16 +25,27 @@ int main(int argc,char ** argv)
     cascade_classifer cascade;
     Mat frame;
 
-    int face_quantity;
+
+/*    Mat p1,p2,p3;
+    vector<Rect> v1,v2,v3;
+    p1=imread("../1.JPG") ,p2=imread("../2.JPG"),p3=imread("../3.JPG");
+    //v1=cascade.faces(p1);
+    v2=cascade.faces(p2),v3=cascade.faces(p3);
+
+    cout<<v1.size()<<endl;
+    cout<<v2.size()<<endl;
+    cout<<v3.size()<<endl;
+    //imshow("1",p1);
+    imshow("2",p2);
+    imshow("3",p3);
+    waitKey(0);*/
+    vector<Rect> faces;
     while(true)
     {
         cap>>frame;
-        face_quantity = cascade.faces(frame);
-        cout<<face_quantity<<endl;;
+        faces = cascade.faces(frame);
+        cout<<faces.size()<<endl;;
         imshow("cam",frame);
         waitKey(1);
     }
 }
-
-
-

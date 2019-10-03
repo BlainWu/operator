@@ -18,14 +18,19 @@ public:
 
     cascade_classifer();
     ~cascade_classifer();
-    int faces(Mat frame);
+    vector<Rect> faces(Mat frame);
+    vector<Rect> eyes(Mat frame);
+
 private:
     FileStorage config;
     CascadeClassifier face_cascade;
     CascadeClassifier eyes_cascade;
     String FACE_MODEL_PATH;
     String EYES_MODEL_PATH;
-
+    int FACE_MINS;
+    float FACE_OVERLAP_RATE;
+    bool eye_on_face(Rect eye, Rect face);
+    bool isOverlap(Rect rct1, Rect rct2);
 };
 
 
