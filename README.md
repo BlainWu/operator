@@ -18,7 +18,7 @@ void forward(); //匀速前进
 void backward();//匀速后退
 void move_stop();//停止
 ## Cascade_classifer.h
-vector<Rect> faces(Mat frame); //返回人脸框信息 (x，y,width,height)
+vector<Rect> faces(Mat frame); //返回所有人脸框信息 (x，y,width,height)
 vector<Rect> eyes(Mat frame);
 
 # 配置参数 config_sys.yaml
