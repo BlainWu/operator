@@ -1,7 +1,12 @@
 %YAML:1.0
 camera_num: 0
 FPS: 30
-face_model_path: "../data/haarcascade_frontalface_alt2.xml"
-eyes_model_path: "../data/haarcascade_eye_tree_eyeglasses.xml"
+face_model_path: "../data/cascade_model/haarcascade_frontalface_alt2.xml"
+eyes_model_path: "../data/cascade_model/haarcascade_eye_tree_eyeglasses.xml"
 face_overlap_rate: 0.9
 face_mins: 2
+age_text: "../data/age_net_definitions/deploy.prototxt"
+age_model: "../data/dnn_model/age_net.caffemodel"
+gender_text: "../data/gender_net_definitions/deploy.prototxt"
+gender_model: "../data/dnn_model/gender_net.caffemodel"
+age_gender_font_size: 1.2
