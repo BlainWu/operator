@@ -10,3 +10,6 @@ age_model: "../data/dnn_model/age_net.caffemodel"
 gender_text: "../data/gender_net_definitions/deploy.prototxt"
 gender_model: "../data/dnn_model/gender_net.caffemodel"
 age_gender_font_size: 1.2
+common_thickness: 2
+operator_thickness: 3
+tf_model: "./data/dnn_model/model.pb"
