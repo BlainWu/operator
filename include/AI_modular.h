@@ -21,19 +21,19 @@ public:
     ~AI_modular();
     void predict_age(Mat image);
     void predict_gender(Mat image);
-    int face_recognize(Mat image);
+    //   int face_recognize(Mat image);
 
 private:
     FileStorage config;
     Net age_net;
     Net gender_net;
-    Net face_recognize_net;
-    String FACE_MODEL;
-    String AGE_MODEL,AGE_TEXT;
-    String GENDER_MODEL,GENDER_TEXT;
-    int COMMON_THICKNESS,OPERATOR_THICKNESS;
+ //   Net face_recognize_net;
+ //   String FACE_MODEL,FACE_PBTXT;//tensorflow model :face_recognize
+    String AGE_MODEL,AGE_TEXT;//caffe model :age
+    String GENDER_MODEL,GENDER_TEXT;//caffe model :gender recognize
+    int COMMON_THICKNESS,OPERATOR_THICKNESS; // draw config
     vector<String> ages;
-    vector<String> operators;
+
     float FONT_SIZE;
 };
 
