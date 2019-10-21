@@ -23,7 +23,7 @@ cascade_classifer::~cascade_classifer()
 vector<Rect> cascade_classifer::faces(Mat frame) {
     //init and preproce
     cascade_classifer cascade;
-    size_t num_faces_pre, num_eye, repeat, repeat_final;
+    size_t num_faces, repeat, repeat_final;
     Mat frame_gray;
     vector<Rect> faces_init, eyes, faces, faces_final;
 
@@ -32,73 +32,54 @@ vector<Rect> cascade_classifer::faces(Mat frame) {
     cvtColor(frame, frame_gray, COLOR_BGR2GRAY);
 
     //detect
-    face_cascade.detectMultiScale(frame_gray, faces_init, 1.1, FACE_MINS);
-    eyes = cascade.eyes(frame_gray);
-    for (num_faces_pre = 0; num_faces_pre < faces_init.size(); num_faces_pre++) {
-        for (num_eye = 0; num_eye < eyes.size(); num_eye++) {
-            if (cascade.eye_on_face(eyes[num_eye], faces_init[num_faces_pre])) {
-                rectangle(frame, cvPoint(faces_init[num_faces_pre].x, faces_init[num_faces_pre].y),
-                          cvPoint(faces_init[num_faces_pre].x + faces_init[num_faces_pre].width,
-                                  faces_init[num_faces_pre].y + faces_init[num_faces_pre].height),
-                          Scalar(255, 0, 0),2);
-                faces.push_back(faces_init[num_faces_pre]);
-            } else continue;
-        }
-    }
-    if(faces.size()==0)
-    {
-        return faces;
-    }
-    else
-        {
-            faces_final.push_back(faces[0]);
-            for(repeat=0;repeat<faces.size();repeat++)
-            {
-                for(repeat_final=0;repeat_final<faces_final.size();repeat_final++)
-                {
-                    if (!cascade.isOverlap(faces[repeat], faces_final[repeat_final]))
-                        continue;
-                    else break;
-                }
-                if(repeat_final==faces_final.size())
-                    faces_final.push_back(faces[repeat]);
-                else continue;
-            }
-        }
+    face_cascade.detectMultiScale(frame_gray, faces_init, 1.1, FACE_MINS,0,Size(50,50),Size(350,350));
 
+    if(faces_init.size()==0)
+        return faces_init;
+    else
+    {
+        faces.push_back(faces_init[0]);
+        for(repeat=1;repeat<faces_init.size();repeat++)
+        {
+            for(repeat_final=0;repeat_final<faces.size();repeat_final++)
+            {
+                if(cascade.isOverlap(faces_init[repeat], faces[repeat_final]))
+                    break;
+            }
+            if(repeat_final==faces.size())
+                faces.push_back(faces_init[repeat]);
+            else continue;
+        }
+    }
+        
+    for(num_faces=0;num_faces<faces.size();num_faces++)
+    {
+        eyes=cascade.eyes(frame_gray(faces[num_faces]));
+        if(eyes.size())
+        {
+            faces_final.push_back(faces[num_faces]);
+            rectangle(frame, cvPoint(faces[num_faces].x, faces[num_faces].y),
+                      cvPoint(faces[num_faces].x + faces[num_faces].width,
+                              faces[num_faces].y + faces[num_faces].height),
+                      Scalar(255, 0, 0),2);
+        }
+    }
     return faces_final;
 }
 
 vector<Rect> cascade_classifer::eyes(Mat frame)
 {
-    if(frame.empty())
-        cout<<"No image in frame!"<<endl;
     vector<Rect> eyes_data;
     eyes_cascade.detectMultiScale(frame, eyes_data);
-
-    size_t num_eye;
-    for(num_eye = 0;num_eye<eyes_data.size();num_eye++)
-    {
-        rectangle(frame,cvPoint(eyes_data[num_eye].x,eyes_data[num_eye].y),
-                cvPoint(eyes_data[num_eye].x+eyes_data[num_eye].width,
-                        eyes_data[num_eye].y+eyes_data[num_eye].height),Scalar(0,255,0));
-    }
     return eyes_data;
-}
-
-bool cascade_classifer::eye_on_face(Rect eye,Rect face)
-{
-    if(face.x<eye.x && (face.x+face.width)>eye.x && eye.y >face.y && eye.y<(face.y+face.height))
-        return true;
-    else return false;
 }
 
 bool cascade_classifer::isOverlap(Rect rc1,Rect rc2)
 {
-    if ((rc1.x + rc1.width)*FACE_OVERLAP_RATE  > rc2.x &&
-        (rc2.x + rc2.width)*FACE_OVERLAP_RATE  > rc1.x &&
-        (rc1.y + rc1.height)*FACE_OVERLAP_RATE > rc2.y &&
-        (rc2.y + rc2.height)*FACE_OVERLAP_RATE > rc1.y
+    if ((rc1.x + rc1.width*FACE_OVERLAP_RATE)  > rc2.x &&
+        (rc2.x + rc2.width*FACE_OVERLAP_RATE)  > rc1.x &&
+        (rc1.y + rc1.height*FACE_OVERLAP_RATE) > rc2.y &&
+        (rc2.y + rc2.height*FACE_OVERLAP_RATE) > rc1.y
         )
         return true;
     else

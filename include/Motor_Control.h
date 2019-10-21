@@ -43,7 +43,7 @@ public:
     void backward();
     void move_stop();
     void turn_back(float angle);
-    void buzzer(int time_ms)
+    
 private:
     int getData(int reg_address);
     int fd;

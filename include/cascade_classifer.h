@@ -29,7 +29,6 @@ private:
     String EYES_MODEL_PATH;
     int FACE_MINS;
     float FACE_OVERLAP_RATE;
-    bool eye_on_face(Rect eye, Rect face);
     bool isOverlap(Rect rct1, Rect rct2);
 };
 
