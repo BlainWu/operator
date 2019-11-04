@@ -1,10 +1,11 @@
 # operator
 服务机器人赛题
 # 文件夹说明
-src：存放源代码
+src：源代码
 config：参数存放
 data：检测模型
-include：c++类
+include：c++类  
+result:运行结果
 
 # 环境要求
 OpenCV 3 +Contirb模块
@@ -17,6 +18,8 @@ void turn_right();//原地右转
 void forward(); //匀速前进  
 void backward();//匀速后退  
 void move_stop();//停止  
+void Motor_Control::turn_back(float angle) //转身一定的角度  
+void Motor_Control::buzzer(int time_ms)//蜂鸣器鸣响一定的时间  
 ## Cascade_classifer.h
 vector<Rect> faces(Mat frame); //返回所有人脸框信息 (x，y,width,height)  
 vector<Rect> eyes(Mat frame); //返回人眼框信息  
