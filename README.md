@@ -7,19 +7,23 @@ data：检测模型
 include：c++类
 
 # 环境要求
-OpenCV 3
+OpenCV 3 +Contirb模块
 wiringPi（树莓派）
 
 # 可引用的函数
-## Motor_Control.h	
-void turn_left(); //原地左转
-void turn_right();//原地右转
-void forward(); //匀速前进
-void backward();//匀速后退
-void move_stop();//停止
+## Motor_Control.h
+void turn_left(); //原地左转  
+void turn_right();//原地右转  
+void forward(); //匀速前进  
+void backward();//匀速后退  
+void move_stop();//停止  
 ## Cascade_classifer.h
-vector<Rect> faces(Mat frame); //返回所有人脸框信息 (x，y,width,height)
-vector<Rect> eyes(Mat frame);
+vector<Rect> faces(Mat frame); //返回所有人脸框信息 (x，y,width,height)  
+vector<Rect> eyes(Mat frame); //返回人眼框信息  
+bool isOverlap(Rect rc1,Rect rc2) //判断两个人脸框是否高度（重叠度阈值可设置）  
+vector<Rect> Rect_Union(vector<Rect> rc1,vector<Rect> rc2) //取两组矩形容器的并集  
+## AI_modeular.h
+	void AI_modular::predict_age(Mat image)
 
 # 配置参数 config_sys.yaml
 camera_num ：相机序列号 默认0
