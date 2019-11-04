@@ -23,7 +23,8 @@ vector<Rect> eyes(Mat frame); //返回人眼框信息
 bool isOverlap(Rect rc1,Rect rc2) //判断两个人脸框是否高度（重叠度阈值可设置）  
 vector<Rect> Rect_Union(vector<Rect> rc1,vector<Rect> rc2) //取两组矩形容器的并集  
 ## AI_modeular.h
-	void AI_modular::predict_age(Mat image)
+void predict_age(Mat image)//返回一个年龄判断
+void predict_gender(Mat image) //返回一个性别判断
 
 # 配置参数 config_sys.yaml
 camera_num ：相机序列号 默认0
